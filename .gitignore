@@ -1,0 +1,6 @@
+# User's personal channel list (they create their own)
+# channels.json is tracked as the default/example — users modify their installed copy
+
+__pycache__/
+*.pyc
+.DS_Store
