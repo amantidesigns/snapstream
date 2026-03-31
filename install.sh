@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Stream TV — Raycast Script Command Installer
+# SnapStream — Raycast Script Command Installer
 
 SCRIPTS_DIR="$HOME/.raycast/scripts"
 SOURCE_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "Installing Stream TV for Raycast..."
+echo "Installing SnapStream for Raycast..."
 
 # Create Raycast scripts directory if needed
 mkdir -p "$SCRIPTS_DIR"
@@ -32,4 +32,4 @@ echo "  1. Open Raycast Settings (Cmd+,)"
 echo "  2. Go to Extensions > Script Commands"
 echo "  3. Add $SCRIPTS_DIR if not already listed"
 echo ""
-echo "Then type 'Stream TV' in Raycast to start watching."
+echo "Then type 'SnapStream' in Raycast to start watching."

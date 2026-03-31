@@ -1,25 +1,33 @@
-# Stream TV for Raycast
+# SnapStream
 
-A Raycast script command that lets you search and watch live TV channels directly from your Mac. Type a channel name, hit Enter, and it opens in QuickTime Player — no app switching, no browser tabs.
+Live TV in Picture-in-Picture, right from Raycast. Breaking news, live sports, or any channel — floating over your workspace in three keystrokes.
 
 ![Raycast](https://img.shields.io/badge/Raycast-Script%20Command-FF6363)
 ![macOS](https://img.shields.io/badge/macOS-13%2B-000000)
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB)
 
+## Why
+
+When something major is happening in the world, you don't want to go hunt for an article or open a browser tab. You want to hit Cmd+Space, type three letters, and have CNN live in the corner of your screen while you keep working.
+
+Same for sports — type "Wolves" and the game is floating over your code in Picture-in-Picture. Open as many streams as you want. They all float independently.
+
+SnapStream is for people who spend long hours at their desk and want instant awareness of what's happening without breaking focus.
+
 ## How it works
 
-1. Open Raycast and type **Stream TV**
-2. Enter a search term (e.g., `CNN`, `BBC`, `NBA`)
+1. Open Raycast and type **SnapStream**
+2. Enter a search term (e.g., `CNN`, `BBC`, `Wolves`)
 3. The best matching channel opens live in QuickTime Player
-4. Open as many channels as you want simultaneously
+4. QuickTime automatically enters Picture-in-Picture — the stream floats over your work
 
-The script searches your local channel list (`channels.json`) and optionally pulls from a remote M3U playlist for live sports and additional channels.
+No browser. No app switching. No tab management.
 
 ## Install
 
 ```bash
-git clone https://github.com/amelkamu/raycast-stream-tv.git
-cd raycast-stream-tv
+git clone https://github.com/amantidesigns/snapstream.git
+cd snapstream
 ./install.sh
 ```
 
@@ -28,7 +36,7 @@ Then in Raycast:
 2. Go to **Extensions** > **Script Commands**
 3. Make sure `~/.raycast/scripts` is listed as a script directory
 
-That's it. Type "Stream TV" in Raycast to start.
+Type "SnapStream" in Raycast to start watching.
 
 ## Add your own channels
 
@@ -73,14 +81,13 @@ You need `.m3u8` stream URLs. Here are some places to find them:
 | **Pluto TV** | Free ad-supported channels (US) | [pluto.tv](https://pluto.tv) |
 | **TVPASS** | Live sports and TV streams | [tvpass.org](https://tvpass.org) |
 
-To extract `.m3u8` URLs from an M3U playlist file, open it in a text editor -- each channel has a `#EXTINF:` metadata line followed by the stream URL on the next line.
+To extract `.m3u8` URLs from an M3U playlist file, open it in a text editor — each channel has a `#EXTINF:` metadata line followed by the stream URL on the next line.
 
-### Using an M3U playlist file directly
+### Converting an M3U playlist
 
-If you have an `.m3u` or `.m3u8` playlist file, you can convert it to `channels.json` format:
+If you have an `.m3u` or `.m3u8` playlist file, convert it to `channels.json`:
 
 ```bash
-# Quick conversion (requires python3)
 python3 -c "
 import re, json, sys
 channels = []
@@ -101,7 +108,7 @@ print(json.dumps(channels, indent=2))
 
 ## Remote playlist
 
-By default, the script also fetches channels from a remote M3U playlist (currently [tvpass.org](https://tvpass.org)) for live sports. You can change or disable this by editing the `PLAYLIST_URL` variable at the top of `stream-tv.py`:
+By default, SnapStream also fetches channels from a remote M3U playlist for live sports. You can change or disable this by editing the `PLAYLIST_URL` variable at the top of `stream-tv.py`:
 
 ```python
 # Change to your preferred playlist
@@ -129,14 +136,14 @@ All configuration is at the top of `stream-tv.py`:
 
 ## Roadmap
 
-This is currently a Raycast Script Command. The plan is to evolve it into a full Raycast Extension with:
+SnapStream is currently a Raycast Script Command. The plan is to evolve it into a full Raycast Extension with:
 
 - Interactive channel browser with search and categories
-- User preferences (choose your player, configure playlists in Raycast settings)
 - Favorites and recently watched
+- Multiple playlist sources
 - Submission to the Raycast Extension Store
 
-See the [GitHub milestones](../../milestones) for detailed plans.
+See the [milestones](../../milestones) for detailed plans.
 
 ## License
 

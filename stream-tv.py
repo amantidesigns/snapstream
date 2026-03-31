@@ -2,16 +2,16 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Stream TV
+# @raycast.title SnapStream
 # @raycast.mode compact
-# @raycast.packageName Live TV Streams
+# @raycast.packageName SnapStream
 # @raycast.icon 📺
 
 # Optional parameters:
 # @raycast.argument1 { "type": "text", "placeholder": "Search (e.g., CNN, BBC, NBA)", "optional": true }
 
 # Documentation:
-# @raycast.description Find and play live TV streams in QuickTime Player
+# @raycast.description Live TV in Picture-in-Picture — breaking news and sports floating over your workspace
 # @raycast.author amelkamu
 
 import sys
@@ -126,12 +126,18 @@ def rank_channels(channels: List[Dict[str, str]], search_term: str = "") -> List
 
 
 def open_in_quicktime(stream_url: str):
-    """Open stream in QuickTime Player."""
+    """Open stream in QuickTime Player and trigger Picture-in-Picture."""
     try:
         subprocess.Popen([
             'open',
             '-a', 'QuickTime Player',
             stream_url
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        # Wait for QuickTime to load the stream, then trigger PiP
+        subprocess.Popen([
+            'bash', '-c',
+            'sleep 3 && osascript -e \'tell application "System Events" to tell process "QuickTime Player" to click menu item "Enter Picture in Picture" of menu "View" of menu bar 1\''
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception as e:
         print(f"Error opening QuickTime: {e}")
