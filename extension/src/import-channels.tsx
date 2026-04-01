@@ -110,7 +110,11 @@ function ImportPreview({ channels }: { channels: Channel[] }) {
                 icon={selected.has(channel.url) ? { source: Icon.CheckCircle, tintColor: "green" } : Icon.Circle}
                 actions={
                   <ActionPanel>
-                    <Action title="Toggle Selection" icon={Icon.CheckCircle} onAction={() => toggleChannel(channel.url)} />
+                    <Action
+                      title="Toggle Selection"
+                      icon={Icon.CheckCircle}
+                      onAction={() => toggleChannel(channel.url)}
+                    />
                     <Action
                       title={`Import ${selected.size} Channels`}
                       icon={Icon.Download}

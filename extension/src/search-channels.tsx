@@ -1,4 +1,14 @@
-import { List, ActionPanel, Action, Icon, getPreferenceValues, showToast, Toast, Color, LocalStorage } from "@raycast/api";
+import {
+  List,
+  ActionPanel,
+  Action,
+  Icon,
+  getPreferenceValues,
+  showToast,
+  Toast,
+  Color,
+  LocalStorage,
+} from "@raycast/api";
 import { useCachedPromise, useFrecencySorting } from "@raycast/utils";
 import { loadChannelsFromJson, fetchRemotePlaylist, groupChannelsByCategory } from "./lib/channels";
 import { openStream } from "./lib/player";
@@ -9,10 +19,7 @@ const FAVORITES_KEY = "favorites";
 export default function SearchChannels() {
   const preferences = getPreferenceValues<Preferences>();
 
-  const {
-    data: channels = [],
-    isLoading: isLoadingChannels,
-  } = useCachedPromise(async () => {
+  const { data: channels = [], isLoading: isLoadingChannels } = useCachedPromise(async () => {
     const local = loadChannelsFromJson();
     const remote = preferences.playlistUrl ? await fetchRemotePlaylist(preferences.playlistUrl) : [];
     return [...local, ...remote];
@@ -95,9 +102,7 @@ export default function SearchChannels() {
       />
 
       {favoriteChannels.length > 0 && (
-        <List.Section title="Favorites">
-          {favoriteChannels.map((channel) => renderItem(channel, true))}
-        </List.Section>
+        <List.Section title="Favorites">{favoriteChannels.map((channel) => renderItem(channel, true))}</List.Section>
       )}
 
       {sortedCategories.map((category) => (

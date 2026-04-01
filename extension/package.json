@@ -1,10 +1,17 @@
 {
+  "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "snapstream",
   "title": "SnapStream",
   "description": "Live TV in Picture-in-Picture — breaking news and sports floating over your workspace",
   "icon": "extension-icon.png",
-  "author": "amelkamu",
-  "categories": ["Media", "Productivity"],
+  "author": "amanti_melkamu",
+  "categories": [
+    "Media",
+    "Productivity"
+  ],
+  "platforms": [
+    "macOS"
+  ],
   "license": "MIT",
   "preferences": [
     {
@@ -55,7 +62,7 @@
     "@raycast/utils": "^1.19.1"
   },
   "devDependencies": {
-    "@raycast/eslint-config": "^1.0.11",
+    "@raycast/eslint-config": "^2.1.1",
     "@types/node": "22.13.14",
     "@types/react": "19.0.12",
     "eslint": "^9.23.0",
@@ -67,7 +74,7 @@
     "dev": "ray develop",
     "fix-lint": "ray lint --fix",
     "lint": "ray lint",
-    "prepublishOnly": "echo \"Error: no publish\" && exit 1",
+    "prepublishOnly": "echo \"\n\nIt seems like you are trying to publish the Raycast extension to npm.\n\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\n\n\" && exit 1",
     "publish": "npx @raycast/api@latest publish"
   }
 }

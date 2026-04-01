@@ -1,5 +1,6 @@
-node_modules/
-dist/
+node_modules
 .DS_Store
-__pycache__/
-*.pyc
+dist
+raycast-env.d.ts
+.vscode
+.env
