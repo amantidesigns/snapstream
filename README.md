@@ -1,10 +1,11 @@
 # SnapStream
 
+![SnapStream](social-preview.png)
+
 Live TV in Picture-in-Picture, right from Raycast. Breaking news, live sports, or any channel — floating over your workspace in three keystrokes.
 
-![Raycast](https://img.shields.io/badge/Raycast-Script%20Command-FF6363)
+![Raycast](https://img.shields.io/badge/Raycast-Extension-FF6363)
 ![macOS](https://img.shields.io/badge/macOS-13%2B-000000)
-![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB)
 
 ## Why
 
