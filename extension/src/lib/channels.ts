@@ -15,6 +15,27 @@ export function loadChannelsFromJson(): Channel[] {
   }
 }
 
+export function parseM3u(text: string): Channel[] {
+  const lines = text.split("\n");
+  const channels: Channel[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line.startsWith("#EXTINF:")) continue;
+
+    const streamUrl = lines[i + 1]?.trim();
+    if (!streamUrl || streamUrl.startsWith("#")) continue;
+
+    const groupMatch = line.match(/group-title="([^"]*)"/);
+    const group = groupMatch?.[1] ?? "Other";
+    const name = line.substring(line.lastIndexOf(",") + 1).trim();
+
+    channels.push({ name, group, url: streamUrl });
+  }
+
+  return channels;
+}
+
 export async function fetchRemotePlaylist(url: string): Promise<Channel[]> {
   try {
     const controller = new AbortController();
@@ -23,28 +44,15 @@ export async function fetchRemotePlaylist(url: string): Promise<Channel[]> {
     const response = await fetch(url, { signal: controller.signal });
     clearTimeout(timeout);
 
-    const text = await response.text();
-    const lines = text.split("\n");
-    const channels: Channel[] = [];
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line.startsWith("#EXTINF:")) continue;
-
-      const streamUrl = lines[i + 1]?.trim();
-      if (!streamUrl || streamUrl.startsWith("#")) continue;
-
-      const groupMatch = line.match(/group-title="([^"]*)"/);
-      const group = groupMatch?.[1] ?? "";
-      const name = line.substring(line.lastIndexOf(",") + 1).trim();
-
-      channels.push({ name, group, url: streamUrl });
-    }
-
-    return channels;
+    return parseM3u(await response.text());
   } catch {
     return [];
   }
+}
+
+export function saveChannelsToJson(channels: Channel[]): void {
+  const filePath = path.join(environment.assetsPath, "channels.json");
+  fs.writeFileSync(filePath, JSON.stringify(channels, null, 2));
 }
 
 export function rankChannels(channels: Channel[], searchTerm: string): RankedChannel[] {

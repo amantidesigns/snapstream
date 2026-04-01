@@ -22,10 +22,14 @@ declare type Preferences = ExtensionPreferences
 declare namespace Preferences {
   /** Preferences accessible in the `search-channels` command */
   export type SearchChannels = ExtensionPreferences & {}
+  /** Preferences accessible in the `import-channels` command */
+  export type ImportChannels = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
   /** Arguments passed to the `search-channels` command */
   export type SearchChannels = {}
+  /** Arguments passed to the `import-channels` command */
+  export type ImportChannels = {}
 }
 

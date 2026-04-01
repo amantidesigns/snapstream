@@ -41,6 +41,13 @@
       "subtitle": "SnapStream",
       "description": "Browse and search live TV channels, open in Picture-in-Picture",
       "mode": "view"
+    },
+    {
+      "name": "import-channels",
+      "title": "Import Channels",
+      "subtitle": "SnapStream",
+      "description": "Import channels from an M3U playlist file into your channel list",
+      "mode": "view"
     }
   ],
   "dependencies": {
